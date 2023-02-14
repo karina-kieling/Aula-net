@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using aula_dotnet.Interface;
 
@@ -35,7 +36,30 @@ namespace aula_dotnet.Classe
 
         public bool ValidarCnpj(string cnpj)
         {
-            throw new NotImplementedException();
+          //comparando atraves do metodo regex o valor info do cnpj com o padrao "regex"
+          bool retornoCnpjValido = Regex.IsMatch(cnpj, @"^(\d{14})|(\d{2}.\d{3}.\d{3}/\d{4}-\d{2}) $");
+
+            if (retornoCnpjValido)
+            {
+                string subStringCnpj14 = cnpj.Substring(8, 4);
+
+                if (subStringCnpj14 == "0001")
+                {
+                    return true;
+                } else
+
+                return false;
+
+            }
+
+            string subStringCnpj18 = cnpj.Substring(11, 4);
+
+                if (subStringCnpj18 == "0001")
+                {
+                    return true;
+                }
+
+        return false;
         }
     }
 }
